@@ -78,7 +78,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="225" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="QIS-fC-LDo" customClass="SlideMenuCell" customModule="News" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="QIS-fC-LDo" customClass="SlideMenuCell" customModule="News" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="225" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QIS-fC-LDo" id="Qwh-9c-YoD">
@@ -95,6 +95,7 @@
                             <constraint firstItem="fVh-XR-IMZ" firstAttribute="top" secondItem="pW8-dy-iiU" secondAttribute="top" id="I7c-9I-HMT"/>
                             <constraint firstAttribute="bottom" secondItem="fVh-XR-IMZ" secondAttribute="bottom" id="eNf-7e-76x"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="aBz-OJ-ADd"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="fVh-XR-IMZ" id="5m4-xU-8A6"/>
@@ -129,7 +130,29 @@
                     <view key="view" contentMode="scaleToFill" id="N0G-SY-l5M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kdk-nM-LIQ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="b1L-yC-i4g">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b1L-yC-i4g" id="5qh-a6-dnE">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.9949391085" green="0.93333333330000001" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kdk-nM-LIQ" firstAttribute="top" secondItem="jRu-Zb-yfd" secondAttribute="top" id="SMm-R1-Dsp"/>
+                            <constraint firstItem="kdk-nM-LIQ" firstAttribute="leading" secondItem="jRu-Zb-yfd" secondAttribute="leading" id="gxZ-Gm-cfF"/>
+                            <constraint firstItem="jRu-Zb-yfd" firstAttribute="bottom" secondItem="kdk-nM-LIQ" secondAttribute="bottom" id="ro3-AH-VaD"/>
+                            <constraint firstItem="jRu-Zb-yfd" firstAttribute="trailing" secondItem="kdk-nM-LIQ" secondAttribute="trailing" id="tPr-WR-KOP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jRu-Zb-yfd"/>
                     </view>
                     <navigationItem key="navigationItem" id="Npr-MV-VVw">
@@ -139,6 +162,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="kdk-nM-LIQ" id="Fwi-ua-1r9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cuj-Uz-KaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -2,8 +2,7 @@ target 'News' do
 use_frameworks!
 pod 'ReadabilityKit'
 pod 'AlamofireRSSParser'
-pod 'Alamofire'
+# pod 'Alamofire', '~> 4.7.0'
 # pod 'SwiftyJSON'
-pod 'ObjectMapper'
 end
 
