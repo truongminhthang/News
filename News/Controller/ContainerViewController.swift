@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AlamofireRSSParser
+import Alamofire
 
 class ContainerViewController: UIViewController, HandlerSideMenuDelegate {
 
@@ -26,7 +28,10 @@ class ContainerViewController: UIViewController, HandlerSideMenuDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        RSSParser.getRSSFeedResponse(path: "https://www.bisnis.com/rss") { (rssFeed: RSSFeed?, status: NetworkResponseStatus) in
+            print(rssFeed) // it will be nil if status == .error
+        }
+//        coverButton.isHidden = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
