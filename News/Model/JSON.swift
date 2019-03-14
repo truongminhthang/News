@@ -38,6 +38,10 @@ class JSON {
     // get data from json
     func getData() {
     
+<<<<<<< .merge_file_8591rm
+=======
+        
+>>>>>>> .merge_file_pZodKK
         getJsonFeedTemplate(url: completJson) { [weak self] json in
             guard let dataFeedLink = FeedTemplateModel(JSON: json) else { return }
             for i in 0...2 {
