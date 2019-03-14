@@ -31,7 +31,7 @@ class ContainerViewController: UIViewController, HandlerSideMenuDelegate {
         RSSParser.getRSSFeedResponse(path: "https://www.bisnis.com/rss") { (rssFeed: RSSFeed?, status: NetworkResponseStatus) in
             print(rssFeed) // it will be nil if status == .error
         }
-//        coverButton.isHidden = true
+        coverButton.isHidden = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

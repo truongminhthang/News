@@ -78,7 +78,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="225" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="QIS-fC-LDo" customClass="SlideMenuCell" customModule="News" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="QIS-fC-LDo" customClass="SlideMenuCell" customModule="News" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="225" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QIS-fC-LDo" id="Qwh-9c-YoD">
@@ -95,6 +95,7 @@
                             <constraint firstItem="fVh-XR-IMZ" firstAttribute="top" secondItem="pW8-dy-iiU" secondAttribute="top" id="I7c-9I-HMT"/>
                             <constraint firstAttribute="bottom" secondItem="fVh-XR-IMZ" secondAttribute="bottom" id="eNf-7e-76x"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="99T-kx-xmI"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="fVh-XR-IMZ" id="5m4-xU-8A6"/>
@@ -129,7 +130,29 @@
                     <view key="view" contentMode="scaleToFill" id="N0G-SY-l5M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4ik-zf-guo">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gre-nG-GcG" customClass="MainViewCell" customModule="News" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gre-nG-GcG" id="jNK-9u-c2r">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.9949391085" green="0.93333333330000001" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jRu-Zb-yfd" firstAttribute="bottom" secondItem="4ik-zf-guo" secondAttribute="bottom" id="DJj-yf-oxl"/>
+                            <constraint firstItem="4ik-zf-guo" firstAttribute="top" secondItem="N0G-SY-l5M" secondAttribute="top" id="ZYM-VE-g7G"/>
+                            <constraint firstItem="4ik-zf-guo" firstAttribute="leading" secondItem="jRu-Zb-yfd" secondAttribute="leading" id="cv2-8f-5Dv"/>
+                            <constraint firstItem="jRu-Zb-yfd" firstAttribute="trailing" secondItem="4ik-zf-guo" secondAttribute="trailing" id="l57-ki-QYV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jRu-Zb-yfd"/>
                     </view>
                     <navigationItem key="navigationItem" id="Npr-MV-VVw">
@@ -139,6 +162,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="4ik-zf-guo" id="tvV-6Y-tc3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cuj-Uz-KaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
