@@ -22,10 +22,7 @@
 		54B6B22F22395724005C92C0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 54B6B22E22395724005C92C0 /* Podfile */; };
 		54B6B2312239594B005C92C0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6B2302239594B005C92C0 /* ContainerViewController.swift */; };
 		54B6B23322395AD4005C92C0 /* SlideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6B23222395AD4005C92C0 /* SlideMenuVC.swift */; };
-		55F7AF432239EDAF003F20AA /* Category2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7AF3F2239EDAE003F20AA /* Category2.swift */; };
-		55F7AF442239EDAF003F20AA /* Category3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7AF402239EDAE003F20AA /* Category3.swift */; };
-		55F7AF452239EDAF003F20AA /* Category1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7AF412239EDAE003F20AA /* Category1.swift */; };
-		55F7AF462239EDAF003F20AA /* FeedTemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7AF422239EDAF003F20AA /* FeedTemplateModel.swift */; };
+		54B6B235223A0E27005C92C0 /* SlideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6B234223A0E27005C92C0 /* SlideMenuCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,13 +60,10 @@
 		54B6B2282239550F005C92C0 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		54B6B22A22395537005C92C0 /* PasreRSS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasreRSS.swift; sourceTree = "<group>"; };
 		54B6B22C22395577005C92C0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		54B6B22E22395724005C92C0 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		54B6B22E22395724005C92C0 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		54B6B2302239594B005C92C0 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		54B6B23222395AD4005C92C0 /* SlideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuVC.swift; sourceTree = "<group>"; };
-		55F7AF3F2239EDAE003F20AA /* Category2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category2.swift; sourceTree = "<group>"; };
-		55F7AF402239EDAE003F20AA /* Category3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category3.swift; sourceTree = "<group>"; };
-		55F7AF412239EDAE003F20AA /* Category1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category1.swift; sourceTree = "<group>"; };
-		55F7AF422239EDAF003F20AA /* FeedTemplateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTemplateModel.swift; sourceTree = "<group>"; };
+		54B6B234223A0E27005C92C0 /* SlideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuCell.swift; sourceTree = "<group>"; };
 		8B2A596EBD43EBD1D29F1D84 /* Pods-News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.debug.xcconfig"; path = "Pods/Target Support Files/Pods-News/Pods-News.debug.xcconfig"; sourceTree = "<group>"; };
 		D43BDB8766B7078F66A586D3 /* Pods_News.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_News.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F88CAF5101DDD329995B9F10 /* Pods-News.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.release.xcconfig"; path = "Pods/Target Support Files/Pods-News/Pods-News.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +166,7 @@
 				54B6B22C22395577005C92C0 /* MainViewController.swift */,
 				54B6B2302239594B005C92C0 /* ContainerViewController.swift */,
 				54B6B23222395AD4005C92C0 /* SlideMenuVC.swift */,
+				54B6B234223A0E27005C92C0 /* SlideMenuCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -187,12 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				54B6B226223954F1005C92C0 /* FeedLinks.swift */,
-				54B6B22A22395537005C92C0 /* PasreRSS.swift */,
 				54B6B2282239550F005C92C0 /* JSON.swift */,
-				55F7AF422239EDAF003F20AA /* FeedTemplateModel.swift */,
-				55F7AF412239EDAE003F20AA /* Category1.swift */,
-				55F7AF3F2239EDAE003F20AA /* Category2.swift */,
-				55F7AF402239EDAE003F20AA /* Category3.swift */,
+				54B6B22A22395537005C92C0 /* PasreRSS.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -348,7 +339,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireRSSParser/AlamofireRSSParser.framework",
 				"${BUILT_PRODUCTS_DIR}/Ji/Ji.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ReadabilityKit/ReadabilityKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -358,7 +348,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireRSSParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Ji.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReadabilityKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,15 +384,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55F7AF442239EDAF003F20AA /* Category3.swift in Sources */,
-				55F7AF452239EDAF003F20AA /* Category1.swift in Sources */,
 				54B6B1F8223953EE005C92C0 /* ViewController.swift in Sources */,
 				54B6B1F6223953EE005C92C0 /* AppDelegate.swift in Sources */,
 				54B6B2312239594B005C92C0 /* ContainerViewController.swift in Sources */,
-				55F7AF462239EDAF003F20AA /* FeedTemplateModel.swift in Sources */,
 				54B6B23322395AD4005C92C0 /* SlideMenuVC.swift in Sources */,
-				55F7AF432239EDAF003F20AA /* Category2.swift in Sources */,
 				54B6B227223954F1005C92C0 /* FeedLinks.swift in Sources */,
+				54B6B235223A0E27005C92C0 /* SlideMenuCell.swift in Sources */,
 				54B6B22D22395577005C92C0 /* MainViewController.swift in Sources */,
 				54B6B2292239550F005C92C0 /* JSON.swift in Sources */,
 				54B6B22B22395537005C92C0 /* PasreRSS.swift in Sources */,
