@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Container View Controller-->
+        <scene sceneID="Oj6-Rf-kb6">
+            <objects>
+                <viewController id="mD9-SJ-17S" customClass="ContainerViewController" customModule="News" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DWs-sS-WIG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3C-LN-7gD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="ZdO-nk-TiE" kind="embed" id="PgB-38-O2s"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agy-6u-3vy" userLabel="SlideMenuView">
+                                <rect key="frame" x="-240" y="0.0" width="187.5" height="667"/>
+                                <connections>
+                                    <segue destination="MLa-di-3Z4" kind="embed" id="DHh-6Y-4O6"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="g3C-LN-7gD" firstAttribute="trailing" secondItem="oOl-hN-1tF" secondAttribute="trailing" id="E9q-7S-zOY"/>
+                            <constraint firstItem="g3C-LN-7gD" firstAttribute="leading" secondItem="oOl-hN-1tF" secondAttribute="leading" id="EQS-Yy-Zui"/>
+                            <constraint firstItem="g3C-LN-7gD" firstAttribute="top" secondItem="DWs-sS-WIG" secondAttribute="top" id="Sku-Ie-89r"/>
+                            <constraint firstItem="oOl-hN-1tF" firstAttribute="bottom" secondItem="g3C-LN-7gD" secondAttribute="bottom" id="XPV-At-Vo4"/>
+                            <constraint firstAttribute="bottom" secondItem="agy-6u-3vy" secondAttribute="bottom" id="Zhk-Tl-aEd"/>
+                            <constraint firstItem="agy-6u-3vy" firstAttribute="top" secondItem="DWs-sS-WIG" secondAttribute="top" id="eFC-bI-cp5"/>
+                            <constraint firstItem="agy-6u-3vy" firstAttribute="leading" secondItem="oOl-hN-1tF" secondAttribute="leading" constant="-240" id="gxF-Gq-X1O"/>
+                            <constraint firstItem="agy-6u-3vy" firstAttribute="width" secondItem="DWs-sS-WIG" secondAttribute="width" multiplier="1/2" id="hUT-3d-gaD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oOl-hN-1tF"/>
+                    </view>
+                    <connections>
+                        <outlet property="leadingContainerView" destination="gxF-Gq-X1O" id="tIi-nC-c8X"/>
+                        <outlet property="slideMenuView" destination="agy-6u-3vy" id="adU-Ta-9sE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A4P-DK-qCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="162" y="108"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="DXx-p9-LkE">
+            <objects>
+                <viewController id="ZdO-nk-TiE" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zHN-rt-38X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ma-ru-J9Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="917" y="107"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="JLB-D1-9Q6">
+            <objects>
+                <viewController id="MLa-di-3Z4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pW8-dy-iiU">
+                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pvv-uu-6aY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-18" y="869"/>
+        </scene>
+    </scenes>
+</document>
