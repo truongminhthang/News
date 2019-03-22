@@ -8,15 +8,21 @@
 
 import UIKit
 
-class SlideMenuVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
-    @IBOutlet weak var tableView: UITableView!
+class SlideMenuVC: UITableViewController {
+    
+    @IBOutlet weak var imageLogo: UIImageView!
+    @IBOutlet weak var newsButton: UIButton!
+    @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var favouriteButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var infoButton: UIButton!
 
-    let testArr : [String] = ["a","b","c","d"]
+    
+    let slideArr = ["Last News","Category","Favourite","Settings","Information"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
         
+        tableView.rowHeight = 60
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -24,25 +30,28 @@ class SlideMenuVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    func setUpButtons(){
+        
+    }
     
-
+    
     // MARK: - Table view data source
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return testArr.count
+        return 5//slideArr.count
     }
  
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! SlideMenuCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)// as? SlideMenuCell
         
-        cell.textLabel?.text = testArr[indexPath.row]
+        
         // Configure the cell...
 
         return cell

@@ -1,25 +1,15 @@
 //
-//  MainViewCell.swift
+//  CollectionViewCell.swift
 //  News
 //
-//  Created by Toan on 3/14/19.
+//  Created by Toan on 3/21/19.
 //  Copyright © 2019 Toan.IOS. All rights reserved.
 //
 
 import UIKit
 
-enum CellState {
-    case expanded
-    case collapsed
-}
-
-enum ImageState{
-    case expanded
-    case collapsed
-}
-
-class MainViewCell: UITableViewCell {
-
+class CollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var descriptionLabel:UILabel! {
         didSet {
@@ -28,37 +18,25 @@ class MainViewCell: UITableViewCell {
     }
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var imageContent: UIImageView!
-
+    
     var item: RSSItem! {
         didSet {
             titleLabel.text = item.title
             descriptionLabel.text = item.description
             dateLabel.text = item.pubDate
             imageContent.image = item.img
-            
-//            imageContent.images = item.img
+        
         }
         
         
     }
-
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
+        containerView.layer.cornerRadius = 6
+        containerView.layer.masksToBounds = true
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        titleLabel.text = ""
-//        descriptionLabel.text = ""
-//        dateLabel.text = ""
-//    }
-
+    
 }
+
+

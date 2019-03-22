@@ -11,7 +11,6 @@ struct Category1 : Mappable {
 	}
 
 	mutating func mapping(map: Map) {
-
 		feed <- map["feed"]
 	}
 
