@@ -12,7 +12,10 @@ protocol HandlerSideMenuDelegate {
     
 }
 
-class CategoryVC: UITableViewController {
+class CategoryVC: UITableViewController{  //} ,UpdateContrainst{
+//    func update() {
+//    }
+    
     // MARK: - outlet
     
     
@@ -56,6 +59,14 @@ class CategoryVC: UITableViewController {
     }
     @objc
     func ShowNew() {
+//        let deadline = DispatchTime.now() + .seconds(1)
+//        let up = CollectionViewController()
+//        up.delegate = self
+//        DispatchQueue.main.async {
+//            up.collectionView.layoutIfNeeded()
+//            up.collectionView.reloadData()
+//        }
+
         performSegue(withIdentifier: "ShowNew", sender: nil)
     }
     @objc

@@ -8,12 +8,21 @@
 
 import UIKit
 import AVFoundation
+//protocol UpdateContrainst: class {
+//    func update()
+//}
 
 private let reuseIdentifier = "Cell"
 
 class CollectionViewController: UICollectionViewController {
-
-    private var rssItems: [RSSItem]?
+//    weak var delegate: UpdateContrainst?
+    private var isFinishDownloading = false
+    private var rssItems: [RSSItem]?//{
+//        didSet {
+//            self.collectionView?.reloadData()
+//            self.collectionViewLayout.invalidateLayout()
+//        }
+//    }
     private var cellStates: [CellState]?
     var feedUrlStrings = [String]()
 
@@ -23,11 +32,26 @@ class CollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        collectionView?.contentInset = UIEdgeInsets(top: 23, left: 10, bottom: 10, right: 10)
-        if let layout = collectionView?.collectionViewLayout as? Layout {
-            layout.delegate = self
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
+        collectionView.dataSource = self
+        collectionView?.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
+
+        let layout = collectionViewLayout as! CollectionViewLayout
+        layout.delegate = self as? LayoutDelegate
+        layout.numberOfColumns = 2
+        layout.cellPadding = 5
+         
+        
+//        layout.cache.removeAll()
+        
+        DispatchQueue.main.async {
+            self.collectionView.setNeedsDisplay()
+            self.collectionView.reloadData()
+        }
+
+        
         collectionView.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         fetchData()
         print(feedUrlStrings)
@@ -37,18 +61,24 @@ class CollectionViewController: UICollectionViewController {
         let feedParser = RSSParser()
 //        if feedUrlStrings != nil {
         feedUrlStrings.forEach { (string) in
-            
             feedParser.parseFeed(url: string) { data in
+//                DispatchQueue.main.async {
                 self.rssItems = data
                 self.cellStates = Array(repeating: .collapsed, count: data.count)
                 
                 // Phan biet OperationQueue vs DispatchQueue
                 
-                OperationQueue.main.addOperation {
+//                OperationQueue.main.addOperation {
+//                    self.collectionView.reloadSections(IndexSet(integer: 0))
+//                }
+                let deadline = DispatchTime.now() + .seconds(2)
+                
+                DispatchQueue.main.asyncAfter(deadline: deadline) {
                     self.collectionView.reloadSections(IndexSet(integer: 0))
                 }
-                
-                
+            
+//                }
+                self.isFinishDownloading = true
             }
         }
 //        }
@@ -67,7 +97,9 @@ class CollectionViewController: UICollectionViewController {
 //            }
 //        }
     }
-    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.collectionView.layoutIfNeeded()
+    }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
@@ -77,63 +109,31 @@ class CollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
+//        cell.containerView.sys
+        if isFinishDownloading == true {
         if let item = rssItems?[indexPath.item] {
             
             cell.item = item
-            if cell.item.img == nil {
-                // Image constraint
-//                cell.imageContent.topAnchor.constraint(equalToSystemSpacingBelow: cell.containerView.topAnchor, multiplier: 1).isActive = true
-//                cell.imageContent.leadingAnchor.constraint(equalToSystemSpacingAfter: cell.containerView.leadingAnchor, multiplier: 1).isActive = true
-//                cell.imageContent.trailingAnchor.constraint(equalToSystemSpacingAfter: cell.containerView.trailingAnchor, multiplier: 1).isActive = true
-                
-                cell.imageContent.isHidden = true
-                
-//                cell.imageContent.bottomAnchor.constraint(equalToSystemSpacingBelow: cell.containerView.topAnchor, multiplier: 1).isActive = true
-//                cell.imageContent.heightAnchor.constraint(equalToConstant: 0)
-                
-                // Title constraint
-                
-//                cell.titleLabel.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 10).isActive = true
-//                cell.titleLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 4).isActive = true
-//                cell.titleLabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: 4).isActive = true
-//                
-//                
-////                cell.titleLabel.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 4).isActive = true
-//                
-//                // Description constraint
-//                cell.descriptionLabel.topAnchor.constraint(equalTo: cell.titleLabel.bottomAnchor, constant: 10).isActive = true
-//                cell.descriptionLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 4).isActive = true
-//                cell.descriptionLabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: 4).isActive = true
-////                cell.descriptionLabel.topAnchor.constraint(equalTo: cell.dateLabel.topAnchor, constant: 10).isActive = true
-//
-//                // Date constraint
-////                cell.dateLabel.trailingAnchor.constraint(equalTo: cell.descriptionLabel.bottomAnchor, constant: 10).isActive = true
-//                
-//                cell.dateLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 4).isActive = true
-//                cell.dateLabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: 4).isActive = true
-//                cell.dateLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: 2).isActive = true
-//                cell.dateLabel.heightAnchor.constraint(equalToConstant: 20)
-                if let cellStates = cellStates {
-                    cell.descriptionLabel.numberOfLines = 0
-
-                }
-
-            } else {
             
             if let cellStates = cellStates {
                 cell.descriptionLabel.numberOfLines = (cellStates[indexPath.row] == .expanded) ? 0 : 4
                 
             }
-            }
-            print(cell.descriptionLabel.text)
+//            }
+//            print(cell.descriptionLabel.text)
+        }
         }
         // Configure the cell
     
         return cell
     }
+    
+    
+    
     @IBAction func slideMeunu(sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     }
+    
 
 //    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        collectionView.deselectItem(at: indexPath, animated: true)
@@ -147,9 +147,6 @@ class CollectionViewController: UICollectionViewController {
 ////        collectionView.endUpdates()
 //    }
     // MARK: Navigation
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -159,16 +156,73 @@ class CollectionViewController: UICollectionViewController {
 
 }
 
-
-extension CollectionViewController : LayoutDelegate {
+//MARK: UICollectionViewDataSource
+extension CollectionViewController {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     
-    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath:IndexPath) -> CGFloat {
-        guard let imgHeight = rssItems![indexPath.item].img?.size.height  else {return 0}
-        return imgHeight
+    
+    
+    
+}
+
+// MARK: UICollectionViewDelegate
+extension CollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = rssItems?[indexPath.item] else { return }
+//        performSegue(withIdentifier: "<#T##String#>", sender: <#T##Any?#>)
+    }
+
+}
+
+// MARK: - LayoutDelegate
+extension CollectionViewController: LayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+        
+        guard let item = rssItems?[indexPath.item] else { return 0}
+        guard let image = item.img else {return 0}
+//        let boundingRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT))
+//        let rect = AVMakeRect(aspectRatio: image.size, insideRect: boundingRect)
+        
+        
+//        return rect.height
+        return image.size.height
+    }
+    func collectionView(_ collectionView: UICollectionView, heightForTitleAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+//        guard let item = rssItems?[indexPath.item] else { return 0}
+        let item = rssItems![indexPath.item]
+        let titleHeight = heightForTitleText(item.title, width: width - 8)
+        let height = 4 + 4 + titleHeight
+        
+        return height
+    }
+    func collectionView(_ collectionView: UICollectionView, heightForDescriptionAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+        guard let item = rssItems?[indexPath.item] else { return 0}
+        
+        let descriptionHeight = heightForText(item.description, width: width - 8)
+        let height = 4 + 17 + 4 + descriptionHeight + 12
+        return height
+    }
+    
+    
+    func heightForText(_ text: String, width: CGFloat) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: 10)
+        let rect = NSString(string: text).boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(rect.height)
+    }
+    func heightForTitleText(_ text: String, width: CGFloat) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: 14)
+        let rect = NSString(string: text).boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(rect.height)
     }
 }
-//extension CollectionViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 100, height: 100)
-//    }
-//}
+
+
+// MARK: - Pre-fetching API: to preload data
+
+extension CollectionViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+//        <#code#>
+    }
+}

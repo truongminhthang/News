@@ -36,6 +36,7 @@
 		55F7AF442239EDAF003F20AA /* Category3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7AF402239EDAE003F20AA /* Category3.swift */; };
 		55F7AF452239EDAF003F20AA /* Category1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7AF412239EDAE003F20AA /* Category1.swift */; };
 		55F7AF462239EDAF003F20AA /* FeedTemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7AF422239EDAF003F20AA /* FeedTemplateModel.swift */; };
+		DAF76C7E2246A0E400153A27 /* CollectionViewLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF76C7D2246A0E400153A27 /* CollectionViewLayouts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		55F7AF422239EDAF003F20AA /* FeedTemplateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTemplateModel.swift; sourceTree = "<group>"; };
 		8B2A596EBD43EBD1D29F1D84 /* Pods-News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.debug.xcconfig"; path = "Pods/Target Support Files/Pods-News/Pods-News.debug.xcconfig"; sourceTree = "<group>"; };
 		D43BDB8766B7078F66A586D3 /* Pods_News.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_News.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAF76C7D2246A0E400153A27 /* CollectionViewLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayouts.swift; sourceTree = "<group>"; };
 		F88CAF5101DDD329995B9F10 /* Pods-News.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.release.xcconfig"; path = "Pods/Target Support Files/Pods-News/Pods-News.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				549952B12244B1D100F94FCA /* Layouts.swift */,
+				DAF76C7D2246A0E400153A27 /* CollectionViewLayouts.swift */,
 			);
 			path = LayoutsForCollectionView;
 			sourceTree = "<group>";
@@ -196,10 +199,10 @@
 		54B6B22322395406005C92C0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				54098336223E75590075A411 /* CollectionViewController.swift */,
 				549952B02244B1B000F94FCA /* LayoutsForCollectionView */,
 				54B6B22C22395577005C92C0 /* MainViewController.swift */,
 				5409833C22415C680075A411 /* CategoryVC.swift */,
-				54098336223E75590075A411 /* CollectionViewController.swift */,
 				54B6B2302239594B005C92C0 /* ContainerViewController.swift */,
 				54B6B23222395AD4005C92C0 /* SlideMenuVC.swift */,
 				54F67317224277DC008C730D /* TestSlideMenu.swift */,
@@ -453,6 +456,7 @@
 				549952B22244B1D100F94FCA /* Layouts.swift in Sources */,
 				54B6B227223954F1005C92C0 /* FeedLinks.swift in Sources */,
 				54B6B22D22395577005C92C0 /* MainViewController.swift in Sources */,
+				DAF76C7E2246A0E400153A27 /* CollectionViewLayouts.swift in Sources */,
 				54B6B2292239550F005C92C0 /* JSON.swift in Sources */,
 				54B6B22B22395537005C92C0 /* PasreRSS.swift in Sources */,
 			);

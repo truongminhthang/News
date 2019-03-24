@@ -13,7 +13,7 @@ import Alamofire
 
 let completJson : String = "https://raw.githubusercontent.com/gadote/smartnewstest/master/feeds_template.json"
 
-protocol GetDataFromAPI {
+protocol GetDataFromAPI: class {
     func getArrayLinks()
 }
 
@@ -32,7 +32,7 @@ class JSON {
 //    private init() {
 //        
 //    }
-    var delegate: GetDataFromAPI?
+    weak var delegate: GetDataFromAPI?
 
     var categories : [String: [String]] = [:]
     

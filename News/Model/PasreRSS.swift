@@ -36,11 +36,11 @@ struct RSSItem {
 // MARK: - Get feed links
 
 class RSSParser: NSObject, XMLParserDelegate {
-
+    
     private var rssItems: [RSSItem] = []
     private var currentElement = ""
     //TODO: Remove whitespace around strings in swift
-
+    
     private var currentTitle: String = "" {
         didSet {
             currentTitle = currentTitle.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -58,16 +58,39 @@ class RSSParser: NSObject, XMLParserDelegate {
             currentPubDate = currentPubDate.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
     }
+    //    let session: URLSession?
     
+    private var task: URLSessionDownloadTask?
+    private var resumeData: Data?
+    
+    private var isDownloading = false
+    private var isFinishedDownloading = false
+    
+    //
     var currentImage: String = ""
     var currentImage1: [AnyObject] = []
     
     private var parserCompletionHandler: (([RSSItem]) -> Void)?
     
+    //    func resume() {
+    //        if !isDownloading && !isFinishedDownloading {
+    //            isDownloading = true
+    //
+    //            if let resumeData = resumeData {
+    ////                task = session.downloadTask(withResumeData: resumeData, completionHandler: parserCompletionHandler)
+    //
+    //            } else {
+    //
+    //            }
+    //        }
+    //    }
+    
+    
     func parseFeed(url: String, completionHandler: (([RSSItem]) -> Void)?) {
         
         self.parserCompletionHandler = completionHandler
-        let request = URLRequest(url: URL(string: url)!) 
+        //        let request = URLRequest(url: URL(string: url)!)
+        let request = URLRequest(url: URL(string: url)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 1000)
         URLSession.shared.dataTask(with: request) { (data, response, err) in
             guard let data = data else {
                 if let err = err {
@@ -80,7 +103,11 @@ class RSSParser: NSObject, XMLParserDelegate {
             parser.delegate = self
             // Boolen parse()
             parser.parse()
-        }.resume()
+            //            DispatchQueue.main.async {
+            //                completionHandler(
+            //            }
+            
+            }.resume()
     }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
@@ -102,22 +129,24 @@ class RSSParser: NSObject, XMLParserDelegate {
                 currentImage.append(_urlString) // dang nil
             }
         }
-    
+        
     }
     
     func parser(_ parser: XMLParser,foundCharacters string: String) {
         switch currentElement {
         case "title" : currentTitle += string
         case "description" :
-//            let removed = "/>"
-//            var a = string.components(separatedBy: "/>")[1]
-            
-            currentDescription += string
+            let removed = """
+"/>
+"""
+            var a = string.components(separatedBy: removed)[1].description
+//            var b = string - a
+            currentDescription += a
             
         case "pubDate" : var a = string.components(separatedBy: "+").first
-                        currentPubDate += a!
+        currentPubDate += a!
         default: break
-//            "/>
+            //            "/>
         }
     }
     
