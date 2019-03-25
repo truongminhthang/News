@@ -8,56 +8,163 @@
 
 import UIKit
 // MARK: - Parse link Feeds thanh Title, Image, DateTime
-import ReadabilityKit
-import Alamofire
-import AlamofireRSSParser
 
 public enum NetworkResponseStatus {
     case success
     case err(string: String?)
 }
 
-
 struct RSSItem {
     var title : String
     var description : String
-    var pudDate : String
+    var pubDate : String
+    var img : UIImage?
     
-    init(title: String,description: String, pudDate: String) {
+    init(title: String,description: String, pubDate: String, imgString: String) {
         self.title = title
         self.description = description
-        self.pudDate = pudDate
+        self.pubDate = pubDate
+        /// Convert to Image.
+        let imgUrl = NSURL(string: imgString)
+        guard let _imgUrl = imgUrl else {return}
+        guard let data = NSData(contentsOf: _imgUrl as URL) else {return}
+        let image = UIImage(data: data as Data)
+        self.img = image
     }
 }
 
-class ParseRSS: NSObject, XMLParserDelegate {
-//    let demoLinkRSS = "https://www.bisnis.com/rss"
-    let url = URL(string: "https://www.bisnis.com/rss")
+// MARK: - Get feed links
+
+class RSSParser: NSObject, XMLParserDelegate {
     
-    private var rrsItems: [RSSItem] = []
-    private var currentElemant = ""
-    private var currentTitle: String = ""
-    private var currentDescription: String = ""
-    private var currentPudDate: String = ""
+    private var rssItems: [RSSItem] = []
+    private var currentElement = ""
+    //TODO: Remove whitespace around strings in swift
     
-    // Closure
+    private var currentTitle: String = "" {
+        didSet {
+            currentTitle = currentTitle.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        }
+    }
+    
+    private var currentDescription: String = "" {
+        didSet {
+            currentDescription = currentDescription.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        }
+    }
+    
+    private var currentPubDate: String = "" {
+        didSet {
+            currentPubDate = currentPubDate.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        }
+    }
+    //    let session: URLSession?
+    
+    private var task: URLSessionDownloadTask?
+    private var resumeData: Data?
+    
+    private var isDownloading = false
+    private var isFinishedDownloading = false
+    
+    //
+    var currentImage: String = ""
+    var currentImage1: [AnyObject] = []
     
     private var parserCompletionHandler: (([RSSItem]) -> Void)?
     
+    //    func resume() {
+    //        if !isDownloading && !isFinishedDownloading {
+    //            isDownloading = true
+    //
+    //            if let resumeData = resumeData {
+    ////                task = session.downloadTask(withResumeData: resumeData, completionHandler: parserCompletionHandler)
+    //
+    //            } else {
+    //
+    //            }
+    //        }
+    //    }
     
     
-}
-
-public class RSSParser {
-    public static func getRSSFeedResponse(path: String, completionHandler: @escaping (_ response: RSSFeed?,_ status: NetworkResponseStatus) -> Void) {
-        Alamofire.request(path).responseRSS() { response in
-            if let rssFeedXML = response.result.value {
-                // Successful response - process the feed in your completion handler
-                completionHandler(rssFeedXML, .success)
-            } else {
-                // There was an error, so feel free to handle it in your completion handler
-                completionHandler(nil, .err(string: response.result.error?.localizedDescription))
+    func parseFeed(url: String, completionHandler: (([RSSItem]) -> Void)?) {
+        
+        self.parserCompletionHandler = completionHandler
+        //        let request = URLRequest(url: URL(string: url)!)
+        let request = URLRequest(url: URL(string: url)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 1000)
+        URLSession.shared.dataTask(with: request) { (data, response, err) in
+            guard let data = data else {
+                if let err = err {
+                    print(err.localizedDescription)
+                }
+                return
+            }
+            ///Parse xml data
+            let parser = XMLParser(data: data)
+            parser.delegate = self
+            // Boolen parse()
+            parser.parse()
+            //            DispatchQueue.main.async {
+            //                completionHandler(
+            //            }
+            
+            }.resume()
+    }
+    
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        currentElement = elementName
+        
+        // Item moi bat dau tai <item> tag, ta khong quan tam Header
+        if currentElement == "item" {
+            //}|| currentElement == "entry" {
+            // Tai day, ta lam viec vs n + 1 entry
+            currentTitle = ""
+            currentDescription = ""
+            currentPubDate = ""
+            currentImage = ""
+        }
+        else if currentElement == "enclosure" {
+            if let urlString = attributeDict["url"] {
+                currentImage1.append(urlString as AnyObject)
+                guard let _urlString = urlString as? String else {return}
+                currentImage.append(_urlString) // dang nil
             }
         }
+        
     }
+    
+    func parser(_ parser: XMLParser,foundCharacters string: String) {
+        switch currentElement {
+        case "title" : currentTitle += string
+        case "description" :
+            let removed = """
+"/>
+"""
+            var a = string.components(separatedBy: removed)[1].description
+//            var b = string - a
+            currentDescription += a
+            
+        case "pubDate" : var a = string.components(separatedBy: "+").first
+        currentPubDate += a!
+        default: break
+            //            "/>
+        }
+    }
+    
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
+    {
+        if elementName == "item" {
+            let rssItem = RSSItem(title: currentTitle, description: currentDescription, pubDate: currentPubDate, imgString: currentImage.description)
+            self.rssItems.append(rssItem)
+        }
+    }
+    
+    func parserDidEndDocument(_ parser: XMLParser) {
+        parserCompletionHandler?(rssItems)
+    }
+    
+    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error)
+    {
+        print(parseError.localizedDescription)
+    }
+    
 }

@@ -3,13 +3,20 @@
 import Foundation
 import ObjectMapper
 
+
+
 struct FeedTemplateModel : Mappable {
-	var category1 : [Category1]?
-	var category2 : [Category2]?
-	var category3 : [Category3]?
-
+    // MARK: - Change Category Name here ...
+    var category1 : [Category1]?
+    var category2 : [Category2]?
+    var category3 : [Category3]?
+//
+//
+//    var titleCategory1: String? = "Category 1"
+//    var titleCategory2: String? = "Category 2"
+//    var titleCategory3: String? = "Category 3"
 	init?(map: Map) {
-
+        
 	}
 
 	mutating func mapping(map: Map) {
